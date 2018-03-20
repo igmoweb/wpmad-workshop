@@ -10,7 +10,7 @@ Para ello, el repositorio ya incluye su propio archivo de [Docker](https://www.d
 
 - Instala Docker en tu equipo
 - Arranca Docker
-- Clona este repositorio
+- Clona este repositorio `git clone git@github.com:igmoweb/wpmad-workshop.git wpmad-workshop`
 - Ejecuta `docker-compose up` en la carpeta raíz del proyecto. La primera vez tardará unos minutos. El proceso quedará ejecutándose. Para salir simplemente presiona `Ctrl+C`
 - Ejecuta `./bin/install.sh` en otro terminal en la carpeta raíz del proyecto. También puedes ejecutar `docker exec -it --user www-data meetup_phpfpm bash -c 'cd /var/www/html/php ; composer install'` 
 - Abre `http://localhost:8888/` en tu navegador
