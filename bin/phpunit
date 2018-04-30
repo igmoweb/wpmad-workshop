@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker run --rm -it -v $(pwd)/www/php:/app -w /app 10up/phpfpm phpunit
