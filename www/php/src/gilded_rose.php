@@ -136,8 +136,6 @@ class Sulfuras extends Standard {
 
 	public $type = SULFURAS;
 
-	const MAX_QUALITY = false;
-
 	public function tick() {
 		// Do nothing
 	}
