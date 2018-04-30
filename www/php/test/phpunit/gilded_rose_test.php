@@ -36,7 +36,7 @@ class GildedRoseTest extends TestCase {
 
 		$r =& $args;
 		$r = array_merge( $defaults, $r );
-		return new Item( $r['name'], $r['sell_in'], $r['quality'] );
+		return ItemFactory::create( $r['name'], $r['sell_in'], $r['quality'] );
 	}
 
 	function test_item() {
@@ -296,6 +296,46 @@ class GildedRoseTest extends TestCase {
 		$store->update_quality();
 		$this->assertEquals( $sell_in - 1, $items_property->getValue( $store )[0]->sell_in );
 		$this->assertEquals( $quality - 2, $items_property->getValue( $store )[0]->quality );
+	}
+
+	function test_ItemFactory() {
+		$sell_in = 10;
+		$quality = 20;
+
+		$item = ItemFactory::create( 'Whatever', $sell_in, $quality );
+		$this->assertInstanceOf( 'Standard', $item );
+		$this->assertEquals( $sell_in, $item->sell_in );
+		$this->assertEquals( $quality, $item->quality );
+
+		$item = ItemFactory::create( 'Conjured', $sell_in, $quality );
+		$this->assertInstanceOf( 'Conjured', $item );
+		$this->assertEquals( $sell_in, $item->sell_in );
+		$this->assertEquals( $quality, $item->quality );
+
+		$item = ItemFactory::create( 'Backstage passes to a TAFKAL80ETC concert', $sell_in, $quality );
+		$this->assertInstanceOf( 'Backstage', $item );
+		$this->assertEquals( $sell_in, $item->sell_in );
+		$this->assertEquals( $quality, $item->quality );
+
+		$item = ItemFactory::create( 'Sulfuras, Hand of Ragnaros', $sell_in, $quality );
+		$this->assertInstanceOf( 'Sulfuras', $item );
+		$this->assertEquals( $sell_in, $item->sell_in );
+		$this->assertEquals( $quality, $item->quality );
+	}
+
+	function test_ItemFactory_max_quality() {
+		$sell_in = 10;
+		$quality = 60;
+
+		$item = ItemFactory::create( 'Whatever', $sell_in, $quality );
+		$this->assertInstanceOf( 'Standard', $item );
+		$this->assertEquals( $sell_in, $item->sell_in );
+		$this->assertEquals( 50, $item->quality );
+
+		$item = ItemFactory::create( 'Sulfuras, Hand of Ragnaros', $sell_in, $quality );
+		$this->assertInstanceOf( 'Sulfuras', $item );
+		$this->assertEquals( $sell_in, $item->sell_in );
+		$this->assertEquals( $quality, $item->quality );
 	}
 
 }
