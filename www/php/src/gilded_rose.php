@@ -37,6 +37,7 @@ class GildedRose {
 							$item->quality = $item->quality + 1;
 						}
 
+						$item->quality = min( $item->quality, 50 );
 						$item->sell_in --;
 						break;
 					}
@@ -46,6 +47,8 @@ class GildedRose {
 						if ( $item->sell_in <= 0 ) {
 							$item->quality --;
 						}
+
+						$item->quality = min( $item->quality, 50 );
 						$item->sell_in --;
 						break;
 					}

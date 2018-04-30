@@ -263,4 +263,24 @@ class GildedRoseTest extends TestCase {
 		$this->assertEquals( 0, $items_property->getValue( $store )[0]->quality );
 	}
 
+	function test_fix_backstage_over_50() {
+		$sell_in = 15;
+		$quality = 49;
+		$backstage = self::generate_item( [ 'name' => 'Backstage passes to a TAFKAL80ETC concert', 'sell_in' => $sell_in, 'quality' => $quality ] );
+
+		$store = new GildedRose( [ $backstage ] );
+		try {
+			$items_property = self::get_private_property( 'GildedRose', 'items' );
+		} catch ( ReflectionException $e ) {}
+
+		$store->update_quality();
+		$this->assertEquals( $sell_in - 1, $items_property->getValue( $store )[0]->sell_in );
+		$this->assertEquals( 50, $items_property->getValue( $store )[0]->quality );
+
+		$store->update_quality();
+		$this->assertEquals( $sell_in - 2, $items_property->getValue( $store )[0]->sell_in );
+		$this->assertEquals( 50, $items_property->getValue( $store )[0]->quality );
+	}
+
+
 }
