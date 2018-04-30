@@ -17,33 +17,34 @@ class GildedRose {
 	}
 }
 
-const SULFURAS = 'Sulfuras';
-const AGED_BRIE = 'Aged_Brie';
-const BACKSTAGE = 'Backstage';
-const CONJURED = 'Conjured';
-const STANDARD = 'Standard';
-
 class ItemFactory {
+
+	const SULFURAS = 'Sulfuras';
+	const AGED_BRIE = 'Aged_Brie';
+	const BACKSTAGE = 'Backstage';
+	const CONJURED = 'Conjured';
+	const STANDARD = 'Standard';
+
 	public static function create( $name, $sell_in, $quality ) {
-		$classname = STANDARD;
+		$classname = self::STANDARD;
 		switch ( $name ) {
 			case 'Aged Brie': {
-				$classname = AGED_BRIE;
+				$classname = self::AGED_BRIE;
 				break;
 			}
 			case 'Sulfuras, Hand of Ragnaros':
 				{
-					$classname = SULFURAS;
+					$classname = self::SULFURAS;
 					break;
 				}
 			case 'Backstage passes to a TAFKAL80ETC concert':
 				{
-					$classname = BACKSTAGE;
+					$classname = self::BACKSTAGE;
 					break;
 				}
 			case 'Conjured':
 				{
-					$classname = CONJURED;
+					$classname = self::CONJURED;
 					break;
 				}
 		}
@@ -71,8 +72,6 @@ class Item {
 }
 
 class Standard extends Item {
-
-	public $type = STANDARD;
 
 	const MAX_QUALITY = 50;
 
@@ -106,8 +105,6 @@ class Standard extends Item {
 
 class Backstage extends Standard {
 
-	public $type = BACKSTAGE;
-
 	protected function update_quality() {
 		$this->quality ++;
 		if ( $this->sell_in <= 0 ) {
@@ -122,8 +119,6 @@ class Backstage extends Standard {
 
 class Aged_Brie extends Standard {
 
-	public $type = AGED_BRIE;
-
 	protected function update_quality() {
 		$this->quality ++;
 		if ( $this->sell_in <= 0 ) {
@@ -133,8 +128,6 @@ class Aged_Brie extends Standard {
 }
 
 class Sulfuras extends Standard {
-
-	public $type = SULFURAS;
 
 	public function tick() {
 		// Do nothing
@@ -146,8 +139,6 @@ class Sulfuras extends Standard {
 }
 
 class Conjured extends Standard {
-
-	public $type = CONJURED;
 
 	public function update_quality() {
 		$this->quality = $this->quality - 2;
