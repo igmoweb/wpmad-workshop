@@ -19,32 +19,26 @@ class GildedRose {
 
 class ItemFactory {
 
-	const SULFURAS = 'Sulfuras';
-	const AGED_BRIE = 'Aged_Brie';
-	const BACKSTAGE = 'Backstage';
-	const CONJURED = 'Conjured';
-	const STANDARD = 'Standard';
-
 	public static function create( $name, $sell_in, $quality ) {
-		$classname = self::STANDARD;
+		$classname = 'Standard';
 		switch ( $name ) {
 			case 'Aged Brie': {
-				$classname = self::AGED_BRIE;
+				$classname = 'Aged Brie';
 				break;
 			}
 			case 'Sulfuras, Hand of Ragnaros':
 				{
-					$classname = self::SULFURAS;
+					$classname = 'Sulfuras';
 					break;
 				}
 			case 'Backstage passes to a TAFKAL80ETC concert':
 				{
-					$classname = self::BACKSTAGE;
+					$classname = 'Backstage';
 					break;
 				}
 			case 'Conjured':
 				{
-					$classname = self::CONJURED;
+					$classname = 'Conjured';
 					break;
 				}
 		}
