@@ -263,4 +263,19 @@ class GildedRoseTest extends TestCase {
 		$this->assertEquals( 0, $items_property->getValue( $store )[0]->quality );
 	}
 
+	function test_update_quality_for_Conjured() {
+		$sell_in = 15;
+		$quality = 10;
+		$conjured = self::generate_item( [ 'name' => 'Conjured', 'sell_in' => $sell_in, 'quality' => $quality ] );
+
+		$store = new GildedRose( [ $conjured ] );
+		try {
+			$items_property = self::get_private_property( 'GildedRose', 'items' );
+		} catch ( ReflectionException $e ) {}
+
+		$store->update_quality();
+		$this->assertEquals( $sell_in - 1, $items_property->getValue( $store )[0]->sell_in );
+		$this->assertEquals( $quality - 2, $items_property->getValue( $store )[0]->quality );
+	}
+
 }
