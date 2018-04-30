@@ -23,7 +23,7 @@ class ItemFactory {
 		$classname = 'Standard';
 		switch ( $name ) {
 			case 'Aged Brie': {
-				$classname = 'Aged Brie';
+				$classname = 'Aged_Brie';
 				break;
 			}
 			case 'Sulfuras, Hand of Ragnaros':
