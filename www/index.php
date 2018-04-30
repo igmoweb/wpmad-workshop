@@ -30,15 +30,16 @@
 
 		<h3>PHP</h3>
 		<p>
+			Aquí tienes <a href="php/src/index.php">la tienda</a> en PHP. Al final del ejercicio, la salida por pantalla debe ser igual.
+		</p>
+		<p>
 			Si optas por PHP, puedes empezar por <code>./www/php/src/gilded_rose.php</code>. <br>
-			Tienes algunos ejemplos de funcionamiento en <a href="php/src/index.php">esta página</a>, que corresponde al archivo <code>./www/php/src/index.php</code>
 		</p>
 
 		<h3>JavaScript</h3>
+		Aquí tienes <a href="php/src/index.php">la tienda</a> en JS. Al final del ejercicio, la salida por pantalla debe ser igual.
 		<p>
 			Si optas por JavaScript, simplemente abre <code>./www/js/src/gilded_rose.js</code> en tu navegador y editor
-			<br>
-			Tienes algunos ejemplos de funcionamiento en <a href="js/TexttestFixture.html">esta página</a>, que corresponde al archivo <code>./www/js/TexttestFixture.html</code>
 		</p>
 
 		<h2>Unit Testing</h2>
