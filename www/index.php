@@ -59,6 +59,8 @@
 			<li>Cada método de la clase ejecutará un test distinto</li>
 		</ul>
 
+		<p>Puedes generar un reporte sobre la cobertura con <code>./bin/coverage.sh</code></p>
+
 		<h3>Simple Tests (PHP)</h3>
 
 		<ul>
