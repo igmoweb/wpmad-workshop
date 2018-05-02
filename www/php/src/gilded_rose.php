@@ -11,56 +11,39 @@ class GildedRose {
 	function update_quality() {
 
 		foreach ( $this->items as $item ) {
-			switch ( $item->name ) {
-				case 'Aged Brie':
-					{
-						$item->quality ++;
-						if ( $item->sell_in <= 0 ) {
-							$item->quality ++;
-						}
-						$item->quality = min( $item->quality, 50 );
-						$item->sell_in --;
-						break;
-					}
-				case 'Sulfuras, Hand of Ragnaros':
-					{
-						break;
-					}
-				case 'Backstage passes to a TAFKAL80ETC concert':
-					{
-						$item->quality ++;
-						if ( $item->sell_in <= 0 ) {
-							$item->quality = 0;
-						} elseif ( $item->sell_in <= 5 ) {
-							$item->quality = $item->quality + 2;
-						} elseif ( $item->sell_in <= 10 ) {
-							$item->quality = $item->quality + 1;
-						}
-
-						$item->quality = min( $item->quality, 50 );
-						$item->sell_in --;
-						break;
-					}
-				case 'Conjured':
-					{
-						$item->quality = $item->quality - 2;
-						$item->sell_in--;
-						break;
-					}
-				default:
-					{
-						$item->quality --;
-						if ( $item->sell_in <= 0 ) {
-							$item->quality --;
-						}
-
-						$item->quality = min( $item->quality, 50 );
-						$item->sell_in --;
-						break;
-					}
-			}
-			$item->quality = max( 0, $item->quality );
+			/** @var Standard $item */
+			$item->tick();
 		}
+	}
+}
+
+class ItemFactory {
+
+	public static function create( $name, $sell_in, $quality ) {
+		$classname = 'Standard';
+		switch ( $name ) {
+			case 'Aged Brie': {
+				$classname = 'Aged_Brie';
+				break;
+			}
+			case 'Sulfuras, Hand of Ragnaros':
+				{
+					$classname = 'Sulfuras';
+					break;
+				}
+			case 'Backstage passes to a TAFKAL80ETC concert':
+				{
+					$classname = 'Backstage';
+					break;
+				}
+			case 'Conjured':
+				{
+					$classname = 'Conjured';
+					break;
+				}
+		}
+
+		return new $classname( $name, $sell_in, $quality );
 	}
 }
 
@@ -81,4 +64,81 @@ class Item {
 	}
 
 }
+
+class Standard extends Item {
+
+	const MAX_QUALITY = 50;
+
+	public function __construct( $name, $sell_in, $quality ) {
+		parent::__construct( $name, $sell_in, $quality );
+		$this->normalize_quality();
+	}
+
+	public function tick() {
+		$this->update_quality();
+		$this->normalize_quality();
+		$this->update_sell_in();
+	}
+
+	protected function update_sell_in() {
+		$this->sell_in --;
+	}
+
+	protected function update_quality() {
+		$this->quality --;
+		if ( $this->sell_in <= 0 ) {
+			$this->quality --;
+		}
+	}
+
+	protected function normalize_quality() {
+		$this->quality = min( $this->quality, (int) self::MAX_QUALITY );
+		$this->quality = max( $this->quality, 0 );
+	}
+}
+
+class Backstage extends Standard {
+
+	protected function update_quality() {
+		$this->quality ++;
+		if ( $this->sell_in <= 0 ) {
+			$this->quality = 0;
+		} elseif ( $this->sell_in <= 5 ) {
+			$this->quality = $this->quality + 2;
+		} elseif ( $this->sell_in <= 10 ) {
+			$this->quality = $this->quality + 1;
+		}
+	}
+}
+
+class Aged_Brie extends Standard {
+
+	protected function update_quality() {
+		$this->quality ++;
+		if ( $this->sell_in <= 0 ) {
+			$this->quality ++;
+		}
+	}
+}
+
+class Sulfuras extends Standard {
+
+	public function tick() {
+		// Do nothing
+	}
+
+	public function normalize_quality() {
+		$this->quality = max( $this->quality, 0 );
+	}
+}
+
+class Conjured extends Standard {
+
+	public function update_quality() {
+		$this->quality = $this->quality - 2;
+	}
+
+}
+
+
 
