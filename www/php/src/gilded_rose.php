@@ -41,6 +41,12 @@ class GildedRose {
 						$item->sell_in --;
 						break;
 					}
+				case 'Conjured':
+					{
+						$item->quality = $item->quality - 2;
+						$item->sell_in--;
+						break;
+					}
 				default:
 					{
 						$item->quality --;
