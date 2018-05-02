@@ -9,11 +9,11 @@ class SulfurasTest extends GildedRoseTestCase {
 
 		$item1->tick();
 		$this->assertEquals( $sell_in, $item1->sell_in );
-		$this->assertEquals( $quality, $item1->quality );
+		$this->assertEquals( 80, $item1->quality );
 
 		$item1->tick();
 		$this->assertEquals( $sell_in, $item1->sell_in );
-		$this->assertEquals( $quality, $item1->quality );
+		$this->assertEquals( 80, $item1->quality );
 	}
 
 	function test_item_sulfuras_quality_when_sell_in_is_over() {
@@ -22,9 +22,9 @@ class SulfurasTest extends GildedRoseTestCase {
 		$item1 = self::generate_item( [ 'name' => 'Sulfuras, Hand of Ragnaros', 'sell_in' => $sell_in, 'quality' => $quality ] );
 
 		$item1->tick();
-		$this->assertEquals( $quality, $item1->quality );
+		$this->assertEquals( 80, $item1->quality );
 
 		$item1->tick();
-		$this->assertEquals( $quality, $item1->quality );
+		$this->assertEquals( 80, $item1->quality );
 	}
 }

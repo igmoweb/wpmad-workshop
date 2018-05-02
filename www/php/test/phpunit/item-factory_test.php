@@ -24,7 +24,7 @@ class ItemFactoryTest extends GildedRoseTestCase {
 		$item = ItemFactory::create( 'Sulfuras, Hand of Ragnaros', $sell_in, $quality );
 		$this->assertInstanceOf( 'Sulfuras', $item );
 		$this->assertEquals( $sell_in, $item->sell_in );
-		$this->assertEquals( $quality, $item->quality );
+		$this->assertEquals( 80, $item->quality );
 
 		$item = ItemFactory::create( 'Aged Brie', $sell_in, $quality );
 		$this->assertInstanceOf( 'Aged_Brie', $item );
