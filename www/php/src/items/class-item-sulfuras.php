@@ -7,6 +7,6 @@ class Sulfuras extends Standard {
 	}
 
 	public function normalize_quality() {
-		$this->quality = max( $this->quality, 0 );
+		$this->quality = 80;
 	}
 }
