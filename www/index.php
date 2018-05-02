@@ -35,6 +35,9 @@
 		<p>
 			Si optas por PHP, puedes empezar por <code>./www/php/src/gilded_rose.php</code>. <br>
 		</p>
+		<p>
+			Puedes generar un reporte sobre la complejidad del código utilizando <code>./bin/phpmetrics.sh</code>
+		</p>
 
 		<h3>JavaScript</h3>
 		Aquí tienes <a href="php/src/index.php">la tienda</a> en JS. Al final del ejercicio, la salida por pantalla debe ser igual.
