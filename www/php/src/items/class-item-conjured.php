@@ -1,11 +1,4 @@
 <?php
-/**
- * @version:
- */
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
 class Conjured extends Standard {
 
