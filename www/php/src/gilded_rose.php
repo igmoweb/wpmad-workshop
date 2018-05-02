@@ -16,6 +16,10 @@ class GildedRose {
 		$this->items = $items;
 	}
 
+	public function get_items() {
+		return $this->items;
+	}
+
 	function update_quality() {
 
 		foreach ( $this->items as $item ) {
